@@ -4,7 +4,7 @@
 
 ## Демо-проект
 
-[Ссылка](https://openweathermap.org/](https://weather-app-chi-eosin-88.vercel.app/))
+[Ссылка](https://weather-app-chi-eosin-88.vercel.app/)
 
 ## Функциональность
 - Поиск погоды по названию города.
