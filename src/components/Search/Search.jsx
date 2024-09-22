@@ -1,4 +1,4 @@
-// src/components/Search.jsx
+// src/components/Search/Search.jsx
 import React from "react";
 
 function Search({ onSearch }) {
@@ -6,10 +6,13 @@ function Search({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (city.trim() !== "") {
-      onSearch(city);
-      setCity("");
+    const trimmedCity = city.trim();
+    if (trimmedCity.length < 2) {
+      alert("Пожалуйста, введите корректное название города.");
+      return;
     }
+    onSearch(trimmedCity);
+    setCity("");
   };
 
   return (
