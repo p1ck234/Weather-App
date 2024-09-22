@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageWithLoader from '../ImageWithLoader/ImageWithLoader';
 
 function Forecast({ forecast }) {
   if (!forecast) return null;
@@ -27,7 +28,9 @@ function Forecast({ forecast }) {
           return (
             <div className='forecast-card' key={item.dt}>
               <p>{new Date(item.dt_txt).toLocaleDateString()}</p>
-              {weatherIcon && <img src={iconUrl} alt={weatherDescription} />}
+              {weatherIcon && (
+                <ImageWithLoader src={iconUrl} alt={weatherDescription} />
+              )}
               <p>{weatherDescription}</p>
               <p>Температура: {Math.round(item.main.temp)} °C</p>
             </div>

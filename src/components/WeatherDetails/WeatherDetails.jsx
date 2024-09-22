@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageWithLoader from '../ImageWithLoader/ImageWithLoader';
 
 function WeatherDetails({ weather }) {
   if (!weather) return null;
@@ -24,7 +25,9 @@ function WeatherDetails({ weather }) {
         <p>Влажность: {main.humidity}%</p>
         <p>Скорость ветра: {wind.speed} м/с</p>
         <p>Условия: {weatherDescription}</p>
-        {weatherIcon && <img src={iconUrl} alt={weatherDescription} />}
+        {weatherIcon && (
+          <ImageWithLoader src={iconUrl} alt={weatherDescription} />
+        )}
       </div>
     </div>
   );
