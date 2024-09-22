@@ -1,4 +1,4 @@
-// src/components/WeatherDetails.jsx
+// src/components/WeatherDetails/WeatherDetails.jsx
 import React from "react";
 
 function WeatherDetails({ weather }) {
@@ -6,19 +6,30 @@ function WeatherDetails({ weather }) {
 
   const { name, main, weather: weatherInfo, wind } = weather;
 
+  // Проверяем, что weatherInfo является массивом и содержит данные
+  if (!Array.isArray(weatherInfo) || weatherInfo.length === 0) {
+    return <p>Нет данных о погоде.</p>;
+  }
+
+  const weatherIcon = weatherInfo[0].icon.replace("n", "d");
+  const weatherDescription = weatherInfo[0].description;
+
+  // Формируем URL иконки
+  const iconUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
+
+  // Для отладки выводим URL иконки
+  console.log("Icon URL:", iconUrl);
+
   return (
-    <div>
+    <div className="weather-container">
       <h2>Погода в городе {name}</h2>
-      <p>Температура: {main.temp} °C</p>
-      <p>Влажность: {main.humidity}%</p>
-      <p>Скорость ветра: {wind.speed} м/с</p>
-      <p>
-        Условия: {weatherInfo[0].description}
-        <img
-          src={`https://openweathermap.org/img/wn/${weatherInfo[0].icon}@2x.png`}
-          alt={weatherInfo[0].description}
-        />
-      </p>
+      <div className="weather-details">
+        <p>Температура: {Math.round(main.temp)} °C</p>
+        <p>Влажность: {main.humidity}%</p>
+        <p>Скорость ветра: {wind.speed} м/с</p>
+        <p>Условия: {weatherDescription}</p>
+        {weatherIcon && <img src={iconUrl} alt={weatherDescription} />}
+      </div>
     </div>
   );
 }
