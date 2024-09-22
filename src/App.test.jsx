@@ -1,13 +1,13 @@
-import React from "react";
-import { render, waitFor, fireEvent } from "@testing-library/react";
-import axios from "axios";
-import App from "./app";
+import React from 'react';
+import { render, waitFor, fireEvent } from '@testing-library/react';
+import axios from 'axios';
+import App from './app';
 
-jest.mock("axios");
+jest.mock('axios');
 
 const mockWeatherData = {
   data: {
-    name: "Москва",
+    name: 'Москва',
     main: {
       temp: 10,
       humidity: 80,
@@ -17,8 +17,8 @@ const mockWeatherData = {
     },
     weather: [
       {
-        description: "облачно",
-        icon: "04d",
+        description: 'облачно',
+        icon: '04d',
       },
     ],
   },
@@ -30,22 +30,22 @@ const mockForecastData = {
   },
 };
 
-test("отображает лоадер во время загрузки данных", async () => {
+test('отображает лоадер во время загрузки данных', async () => {
   axios.get.mockResolvedValueOnce(mockWeatherData);
   axios.get.mockResolvedValueOnce(mockForecastData);
 
   const { getByPlaceholderText, getByRole, getByTestId, queryByTestId } =
     render(<App />);
 
-  const input = getByPlaceholderText("Введите название города");
-  const button = getByRole("button", { name: /поиск/i });
+  const input = getByPlaceholderText('Введите название города');
+  const button = getByRole('button', { name: /поиск/i });
 
-  fireEvent.change(input, { target: { value: "Москва" } });
+  fireEvent.change(input, { target: { value: 'Москва' } });
   fireEvent.click(button);
 
-  expect(getByTestId("loader")).toBeInTheDocument();
+  expect(getByTestId('loader')).toBeInTheDocument();
 
   await waitFor(() => expect(axios.get).toHaveBeenCalledTimes(2));
 
-  expect(queryByTestId("loader")).not.toBeInTheDocument();
+  expect(queryByTestId('loader')).not.toBeInTheDocument();
 });

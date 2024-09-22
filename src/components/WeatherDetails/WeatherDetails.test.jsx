@@ -1,10 +1,10 @@
-import React from "react";
-import { render } from "@testing-library/react";
-import WeatherDetails from "./WeatherDetails";
+import React from 'react';
+import { render } from '@testing-library/react';
+import WeatherDetails from './WeatherDetails';
 
-test("отображает данные погоды правильно", () => {
+test('отображает данные погоды правильно', () => {
   const mockWeather = {
-    name: "Москва",
+    name: 'Москва',
     main: {
       temp: 10,
       humidity: 80,
@@ -14,14 +14,14 @@ test("отображает данные погоды правильно", () => 
     },
     weather: [
       {
-        description: "облачно",
-        icon: "04d",
+        description: 'облачно',
+        icon: '04d',
       },
     ],
   };
 
   const { getByText, getByAltText } = render(
-    <WeatherDetails weather={mockWeather} />
+    <WeatherDetails weather={mockWeather} />,
   );
 
   expect(getByText(/погода в городе москва/i)).toBeInTheDocument();
