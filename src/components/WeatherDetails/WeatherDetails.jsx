@@ -1,4 +1,3 @@
-// src/components/WeatherDetails/WeatherDetails.jsx
 import React from "react";
 
 function WeatherDetails({ weather }) {
@@ -6,7 +5,6 @@ function WeatherDetails({ weather }) {
 
   const { name, main, weather: weatherInfo, wind } = weather;
 
-  // Проверяем, что weatherInfo является массивом и содержит данные
   if (!Array.isArray(weatherInfo) || weatherInfo.length === 0) {
     return <p>Нет данных о погоде.</p>;
   }
@@ -14,10 +12,8 @@ function WeatherDetails({ weather }) {
   const weatherIcon = weatherInfo[0].icon.replace("n", "d");
   const weatherDescription = weatherInfo[0].description;
 
-  // Формируем URL иконки
   const iconUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
 
-  // Для отладки выводим URL иконки
   console.log("Icon URL:", iconUrl);
 
   return (

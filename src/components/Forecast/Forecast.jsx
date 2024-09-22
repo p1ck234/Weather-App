@@ -1,16 +1,14 @@
-// src/components/Forecast/Forecast.jsx
-import React from "react";
+import React from 'react';
 
 function Forecast({ forecast }) {
   if (!forecast) return null;
 
-  // Получаем прогноз на полдень каждого дня
   const dailyForecast = [];
   const dates = new Set();
 
   for (const item of forecast.list) {
-    const date = item.dt_txt.split(" ")[0];
-    if (!dates.has(date) && item.dt_txt.includes("12:00:00")) {
+    const date = item.dt_txt.split(' ')[0];
+    if (!dates.has(date) && item.dt_txt.includes('12:00:00')) {
       dates.add(date);
       dailyForecast.push(item);
     }
@@ -18,16 +16,16 @@ function Forecast({ forecast }) {
   }
 
   return (
-    <div className="forecast-container">
+    <div className='forecast-container'>
       <h2>Прогноз на 5 дней</h2>
-      <div className="forecast-cards">
+      <div className='forecast-cards'>
         {dailyForecast.map((item) => {
-          const weatherIcon = item.weather[0].icon.replace("n", "d");
+          const weatherIcon = item.weather[0].icon.replace('n', 'd');
           const weatherDescription = item.weather[0].description;
           const iconUrl = `https://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
 
           return (
-            <div className="forecast-card" key={item.dt}>
+            <div className='forecast-card' key={item.dt}>
               <p>{new Date(item.dt_txt).toLocaleDateString()}</p>
               {weatherIcon && <img src={iconUrl} alt={weatherDescription} />}
               <p>{weatherDescription}</p>
